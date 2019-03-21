@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.evrybank.user.model.Account;
 import com.evrybank.user.model.Customer;
 
 public class EvryBankCustomerDaoImpl implements EvryBankCustomerDao {
@@ -65,12 +66,12 @@ public class EvryBankCustomerDaoImpl implements EvryBankCustomerDao {
 					"jdbc:mysql://localhost:3306/evrybank_customer_details?useSSL=false", "RenukaPrasada",
 					"Arpithavs@24");
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO evrybank_customer_details.account values (?, ?");
+					.prepareStatement("INSERT INTO evrybank_customer_details.account values (?,?)");
 			statement.setInt(1, id);
 			statement.setFloat(2, amount);
-			statement.executeUpdate();
 			result = statement.executeUpdate();
 
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -81,6 +82,46 @@ public class EvryBankCustomerDaoImpl implements EvryBankCustomerDao {
 			}
 		}
 		return (result == 1) ? true : false;
+
+	}
+
+	@Override
+	public List<Account> withdrawMoney(int id) {
+		
+		List<Account> accontList = new ArrayList<Account>();
+		Account account;
+		
+		int result = 0;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/evrybank_customer_details?useSSL=false", "RenukaPrasada",
+					"Arpithavs@24");
+			PreparedStatement statement = connection
+					.prepareStatement("select amount from evrybank_customer_details.account where  id=' " +id+ "'");
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				account= new Account();
+			account.setAmount(resultSet.getInt("amount"));
+			
+			accontList.add(account);
+				
+				
+			result = statement.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return accontList;
+
 
 	}
 

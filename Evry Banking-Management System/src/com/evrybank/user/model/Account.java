@@ -5,7 +5,7 @@ public class Account {
 	private int id;
 	private long amount;
 	
-	Account(){}
+	public Account(){}
 
 	public int getId() {
 		return id;

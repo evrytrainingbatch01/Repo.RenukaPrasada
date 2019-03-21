@@ -51,6 +51,13 @@ public class EvryBankCustomerServiceImpl implements EvryBankCustomerService{
 		return evrybankcustomerdao.addMoney(id,amount);
 	}
 
+
+
+	@Override
+	public List<Account> withdrawMoney(int wid) {
+		return evrybankcustomerdao.withdrawMoney(wid);
+	}
+
 	
 
 }

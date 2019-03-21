@@ -15,6 +15,8 @@ public interface EvryBankCustomerService {
 	public boolean sendMoney();
 	public int withdrawMoney();
 	public boolean loanRequest();
+
+	public List<Account> withdrawMoney(int wid);
 	
 	
 }

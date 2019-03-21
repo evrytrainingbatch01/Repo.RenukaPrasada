@@ -8,6 +8,7 @@ import com.evrybank.admin.dao.EvryBankAdminDaoImpl;
 import com.evrybank.admin.service.EvryBankAdminService;
 import com.evrybank.customer.service.EvryBankCustomerService;
 import com.evrybank.customer.service.EvryBankCustomerServiceImpl;
+import com.evrybank.user.model.Account;
 import com.evrybank.user.model.Customer;
 
 public class EvryBankAdminServiceImpl implements EvryBankAdminService {
@@ -27,8 +28,13 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 		EvryBankCustomerService evrybankcustomerservice = new EvryBankCustomerServiceImpl();
 
 		Scanner scanner = new Scanner(System.in);
+		
+		
+		
 
 		System.out.println("Welcome to Evry Banking Management System");
+		
+		
 		System.out.println("Please Enter User Name:");
 
 		userName = scanner.next();
@@ -49,6 +55,7 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 			
 
 		} else {
+			System.exit(0);  
 			System.out.println("User does not exitsted");
 		}
 	}
@@ -75,6 +82,21 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 				System.out.println("Money not added to the customer account");
 			}
 			break;
+			
+		case 2:
+			System.out.println("Please enter customer id");
+			int wid = scanner2.nextInt();
+			
+			/*
+			 * System.out.println("Please enter trasfer amount"); int wamount =
+			 * scanner2.nextInt();
+			 */
+			
+		    List<Account> totalAmount=evrybankcustomerservice.withdrawMoney(wid);
+		    
+		    System.out.println(totalAmount);
+		    
+			break;
 		
 		}
 		
@@ -89,6 +111,7 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 		System.out.println("4 -> Add a money to customer account");
 		System.out.println("5 -> Approve a transaction");
 		System.out.println("6 -> Provide Loan");
+		System.out.println("7 -> Exit ");
 
 		int choice = scanner.nextInt();
 		switch (choice) {
@@ -120,6 +143,20 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 				System.out.println("Money not transfored to the customer account");
 			}
 			break;
+			
+		case 5:
+			System.out.println("Approve transaction is progressing");
+		break;
+		
+		case 6:
+			
+			System.out.println("Loan provide is progressing");
+		break;
+			
+			case 7:System.exit(0);
+			break;
+			
+			
 		}
 	}
 
@@ -159,14 +196,7 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 		customer.setPassword(scanner.next());
 		
 		System.out.println("Plese enter Admin=1,user=0: ");
-		customer.setAccess(scanner.nextInt());
-
-
-
-
-		
-
-		
+		customer.setAccess(scanner.nextInt());		
 
 		return evryBankAdminDao.addCustomer(customer);
 	}
