@@ -69,6 +69,8 @@ public class EvryBankCustomerDaoImpl implements EvryBankCustomerDao {
 					.prepareStatement("INSERT INTO evrybank_customer_details.account values (?,?)");
 			statement.setInt(1, id);
 			statement.setFloat(2, amount);
+			
+			
 			result = statement.executeUpdate();
 
 			

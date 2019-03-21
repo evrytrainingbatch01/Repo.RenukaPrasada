@@ -96,6 +96,8 @@ public class EvryBankAdminServiceImpl implements EvryBankAdminService {
 		    
 		    System.out.println(totalAmount);
 		    
+		   
+		    
 			break;
 		
 		}
